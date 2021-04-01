@@ -469,7 +469,7 @@
                             <tr>
                                 <td class="email-masthead">
                                     <a href="https://its.rutgers.edu" class="f-fallback email-masthead_name">
-                                        <img src="img/letterhead.png" width="300">
+                                        <img src="https://raw.githubusercontent.com/NB-ITS-Web/runbits_invoice/master/img/letterhead.png" width="300">
                                     </a>
                                 </td>
                             </tr>
@@ -483,8 +483,8 @@
                                             <tr>
                                                 <td class="content-cell">
                                                     <div class="f-fallback">
-                                                        <h1>Invoice for Ticket</h1>
-                                                        <p>Invoicee <br> Department</p>
+                                                        <h1>Invoice for Ticket @{triggerOutputs()?['body/Ticket_x0020_Number']} (version @{triggerOutputs()?['body/{VersionNumber}']})</h1>
+                                                        <p>@{triggerOutputs()?['body/Invoicee/DisplayName']}<br> @{triggerOutputs()?['body/Invoicee/Department']}</p>
                                                         <table class="attributes" role="presentation" width="100%"
                                                             cellspacing="0" cellpadding="0">
                                                         </table>
@@ -495,10 +495,10 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
-                                                                        <h3>{{invoice_id}}</h3>
+                                                                        <h3>Invoice ID: @{triggerOutputs()?['body/ID']}</h3>
                                                                     </td>
                                                                     <td>
-                                                                        <h3 class="align-right">{{date}}</h3>
+                                                                        <h3 class="align-right">@{body('Convert_time_zone')}</h3>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -517,18 +517,7 @@
                                                                                         <p class="f-fallback">Amount</p>
                                                                                     </th>
                                                                                 </tr>
-                                                                                <!-- Item Start -->
-                                                                                <tr>
-                                                                                    <td class="purchase_item"
-                                                                                        width="80%"><span
-                                                                                            class="f-fallback">{{description}}</span>
-                                                                                    </td>
-                                                                                    <td class="align-right" width="20%">
-                                                                                        <span
-                                                                                            class="f-fallback">{{amount}}</span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <!-- Item End -->
+@{variables('Invoice Message')}
                                                                                 <tr>
                                                                                     <td class="purchase_footer"
                                                                                         width="80%" valign="middle">
@@ -540,7 +529,7 @@
                                                                                         width="20%" valign="middle">
                                                                                         <p
                                                                                             class="f-fallback purchase_total">
-                                                                                            {{total}}</p>
+                                                                                            $@{triggerOutputs()?['body/Grand_x0020_Total']}</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -549,19 +538,12 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                        <p>
-                                                            <strong>Purchasing Instructions:</strong>
-                                                            <br>
-                                                            Please process payment in Sciquest.
-
-                                                            IPO: UE/SA IT Services (#2583)(Shows up on the 2nd page of
-                                                            IPO Vendors)
-                                                            <br>
-                                                            <br>
-                                                            <strong>Natural Account Code:</strong>
-                                                            <br>
-                                                            IPO:74103 / Journal Entry:200 2130 4818 2110 100 5054 74103
-                                                        </p>
+                                                        <h3>Purchasing Instructions:</h3>
+                                                        <h4>Option 1:</h4>
+                                                        <p>Please process payment in Sciquest.<br />IPO: UE/SA IT Services (#2583) (Shows up on the 2nd page of IPO Vendors)</p>
+                                                        <p>Natural Account Code: 74103</p>
+                                                        <h4>Option 2:</h4>
+                                                        <p>Please reply to this email with your GL or Project string. A journal entry will be processed.</p>
 
 
                                                         <!-- Sub copy -->
